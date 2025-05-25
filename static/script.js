@@ -1,7 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const noteInput = document.getElementById('note-input');
     const addNoteBtn = document.getElementById('add-note-btn');
-    // const notesContainer = document.getElementById('notes-container'); // Not directly used in current logic but good to have if layout changes
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    // Dark Mode: Load Preference on Startup
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.textContent = 'Toggle Light Mode';
+    }
+
+    // Dark Mode: Toggle Functionality
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = 'Toggle Light Mode';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = 'Toggle Dark Mode';
+            }
+        });
+    }
 
     const categoryListIds = {
         'Shopping List': 'notes-shopping-list',
@@ -33,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const textSpan = document.createElement('span');
                     textSpan.textContent = note.text;
                     textSpan.classList.add('note-text'); // For easier selection
+                    if (note.trigger) {
+                        textSpan.title = `Reason: ${note.trigger}`;
+                    }
                     liElement.appendChild(textSpan);
 
                     const deleteBtn = document.createElement('button');

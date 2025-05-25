@@ -188,3 +188,110 @@ h1 {
         margin-bottom: 10px; /* Space between input and buttons when stacked */
     }
 }
+
+/* Dark Mode Styles */
+body.dark-mode {
+    --dark-bg-color: #121212;
+    --dark-text-color: #e0e0e0;
+    --dark-card-bg-color: #1e1e1e; /* Slightly lighter than body */
+    --dark-border-color: #444;
+    --dark-input-bg-color: #2c2c2c;
+    --dark-input-text-color: #e0e0e0;
+    --dark-button-primary-bg: #006400; /* Dark green */
+    --dark-button-secondary-bg: #8B4513; /* Dark orange/brown */
+    --dark-button-danger-bg: #8B0000; /* Dark red */
+    --button-primary-text: #fff; /* Keeping this from light theme for now */
+
+    background-color: var(--dark-bg-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode h1 {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #note-input {
+    background-color: var(--dark-input-bg-color);
+    color: var(--dark-input-text-color);
+    border: 1px solid var(--dark-border-color);
+}
+
+body.dark-mode #note-input::placeholder { /* Style placeholder text for dark mode */
+    color: #aaa; /* Or a lighter gray */
+}
+
+body.dark-mode .input-container button, /* General buttons in input container */
+body.dark-mode #add-note-btn {
+    background-color: var(--dark-button-primary-bg);
+    color: var(--button-primary-text); /* Assuming white text is still okay */
+    border: 1px solid var(--dark-border-color);
+}
+body.dark-mode #add-note-btn:hover {
+    background-color: #007500; /* Slightly lighter dark green */
+}
+
+body.dark-mode #dark-mode-toggle { /* Style the toggle button itself */
+    background-color: #444;
+    color: #fff;
+    border: 1px solid var(--dark-border-color);
+    position: absolute; /* Example positioning */
+    top: 10px;
+    right: 10px;
+}
+ body.dark-mode #dark-mode-toggle:hover {
+    background-color: #555;
+}
+
+
+body.dark-mode .category-section {
+    background-color: var(--dark-card-bg-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Darker shadow or different shadow */
+    border: 1px solid var(--dark-border-color); /* Add border for better separation */
+}
+
+body.dark-mode .category-section h2 {
+    color: var(--dark-text-color);
+    border-bottom: 1px solid var(--dark-border-color);
+}
+
+body.dark-mode .category-section ul li {
+    border-bottom: 1px solid var(--dark-border-color);
+    /* Text color for li items is inherited from body.dark-mode */
+}
+body.dark-mode .category-section ul li:last-child {
+    border-bottom: none;
+}
+
+/* Buttons within list items (Edit, Delete, Save, Cancel) */
+body.dark-mode .category-section ul li button {
+    color: var(--button-primary-text); /* Assuming white text is still okay */
+    border: 1px solid var(--dark-border-color);
+}
+body.dark-mode .category-section ul li button.edit-btn,
+body.dark-mode .category-section ul li button.save-btn { /* Combined edit and save */
+    background-color: var(--dark-button-secondary-bg); /* Using secondary for edit/save consistency */
+}
+body.dark-mode .category-section ul li button.edit-btn:hover,
+body.dark-mode .category-section ul li button.save-btn:hover {
+    background-color: #A0522D; /* Slightly lighter dark orange/brown */
+}
+
+body.dark-mode .category-section ul li button.delete-btn {
+    background-color: var(--dark-button-danger-bg);
+}
+body.dark-mode .category-section ul li button.delete-btn:hover {
+    background-color: #A52A2A; /* Slightly lighter dark red */
+}
+
+body.dark-mode .category-section ul li button.cancel-btn { /* If specific class exists */
+    background-color: #555; /* A neutral dark gray */
+}
+body.dark-mode .category-section ul li button.cancel-btn:hover {
+    background-color: #666;
+}
+
+body.dark-mode .category-section ul li input[type="text"] { /* Inline edit input field */
+    background-color: var(--dark-input-bg-color);
+    color: var(--dark-input-text-color);
+    border: 1px solid var(--dark-border-color);
+}

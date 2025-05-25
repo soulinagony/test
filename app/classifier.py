@@ -1,34 +1,41 @@
-def classify_note(text: str) -> str:
+def classify_note(text: str) -> dict:
     """
     Classifies a note based on keywords in its text.
+    Returns a dictionary with 'category' and 'trigger'.
     """
     lower_text = text.lower()
 
     # Rule 1: Quotes
-    # Check for paired standard or curly quotes on the original text
-    if (text.startswith('"') and text.endswith('"')) or \
-       (text.startswith('“') and text.endswith('”')):
-        return "Quotes"
+    if text.startswith('"') and text.endswith('"'):
+        return {'category': "Quotes", 'trigger': 'paired quotes "..."'}
+    if text.startswith('“') and text.endswith('”'):
+        return {'category': "Quotes", 'trigger': 'paired curly quotes “...”'}
 
-    # Check for quote-related keywords in the lowercased text
     quote_keywords = [' quote', 'quote ', '“', '”', '"', 'said ', 'says ', 'attributed to']
-    if any(keyword in lower_text for keyword in quote_keywords):
-        return "Quotes"
+    for keyword in quote_keywords:
+        if keyword in lower_text:
+            trigger_keyword = keyword.strip()
+            if trigger_keyword in ['“', '”', '"']:
+                 return {'category': "Quotes", 'trigger': f"quote character: '{trigger_keyword}'"}
+            return {'category': "Quotes", 'trigger': f"keyword: '{trigger_keyword}'"}
 
     # Rule 2: Shopping List
     shopping_keywords = ['buy', 'purchase', 'shop', 'market', 'store', 'groceries', 'pick up', 'shopping']
-    if any(keyword in lower_text for keyword in shopping_keywords):
-        return "Shopping List"
+    for keyword in shopping_keywords:
+        if keyword in lower_text:
+            return {'category': "Shopping List", 'trigger': f"keyword: '{keyword}'"}
 
     # Rule 3: Tasks
     task_keywords = ['call ', 'email ', 'schedule ', 'task', 'to-do', 'todo', 'complete ', 'finish ', 'send ', 'need to ']
-    if any(keyword in lower_text for keyword in task_keywords):
-        return "Tasks"
+    for keyword in task_keywords:
+        if keyword in lower_text:
+            return {'category': "Tasks", 'trigger': f"keyword: '{keyword.strip()}'"}
 
     # Rule 4: Ideas
     idea_keywords = ['idea', 'think of', 'concept', 'brainstorm', 'what if', 'consider ']
-    if any(keyword in lower_text for keyword in idea_keywords):
-        return "Ideas"
+    for keyword in idea_keywords:
+        if keyword in lower_text:
+            return {'category': "Ideas", 'trigger': f"keyword: '{keyword.strip()}'"}
 
     # Rule 5: General Notes
-    return "General Notes"
+    return {'category': "General Notes", 'trigger': 'default rule'}

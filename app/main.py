@@ -23,11 +23,12 @@ def add_note():
     if not note_text:
         return jsonify({'error': 'Note text is required'}), 400
 
-    category = classify_note(note_text)
+    classification_result = classify_note(note_text)
     new_note = {
         'id': next_note_id,
         'text': note_text,
-        'category': category, # Use the result from classify_note
+        'category': classification_result['category'],
+        'trigger': classification_result['trigger'],
         'raw_text': note_text
     }
     notes.append(new_note)
@@ -44,9 +45,11 @@ def edit_note(note_id):
 
     for note in notes:
         if note['id'] == note_id:
+            classification_result = classify_note(new_text)
             note['text'] = new_text
             note['raw_text'] = new_text # Assuming raw_text should also be updated
-            note['category'] = classify_note(new_text)
+            note['category'] = classification_result['category']
+            note['trigger'] = classification_result['trigger']
             return jsonify(note)
     
     return jsonify({'error': 'Note not found'}), 404

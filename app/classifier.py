@@ -5,11 +5,18 @@ def classify_note(text: str) -> str:
     lower_text = text.lower()
 
     # Rule 1: Quotes
-    if text.startswith('"') and text.endswith('"'):
+    # Check for paired standard or curly quotes on the original text
+    if (text.startswith('"') and text.endswith('"')) or \
+       (text.startswith('“') and text.endswith('”')):
+        return "Quotes"
+
+    # Check for quote-related keywords in the lowercased text
+    quote_keywords = [' quote', 'quote ', '“', '”', '"', 'said ', 'says ', 'attributed to']
+    if any(keyword in lower_text for keyword in quote_keywords):
         return "Quotes"
 
     # Rule 2: Shopping List
-    shopping_keywords = ['buy ', 'purchase ', 'shop ', 'market', 'store', 'groceries', 'pick up ']
+    shopping_keywords = ['buy', 'purchase', 'shop', 'market', 'store', 'groceries', 'pick up', 'shopping']
     if any(keyword in lower_text for keyword in shopping_keywords):
         return "Shopping List"
 

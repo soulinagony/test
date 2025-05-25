@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notebook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Smart Notebook</h1>
+
+    <div class="input-container">
+        <input type="text" id="note-input" placeholder="Enter your note here...">
+        <button id="add-note-btn">Add Note</button>
+    </div>
+
+    <div id="notes-container">
+        <div class="category-section" id="category-shopping-list">
+            <h2>🛒 Shopping List</h2>
+            <ul id="notes-shopping-list"></ul>
+        </div>
+        <div class="category-section" id="category-tasks">
+            <h2>✅ Tasks</h2>
+            <ul id="notes-tasks"></ul>
+        </div>
+        <div class="category-section" id="category-ideas">
+            <h2>💡 Ideas</h2>
+            <ul id="notes-ideas"></ul>
+        </div>
+        <div class="category-section" id="category-quotes">
+            <h2>📌 Quotes</h2>
+            <ul id="notes-quotes"></ul>
+        </div>
+        <div class="category-section" id="category-general-notes">
+            <h2>🗒️ General Notes</h2>
+            <ul id="notes-general-notes"></ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

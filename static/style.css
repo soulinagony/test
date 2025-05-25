@@ -1,0 +1,190 @@
+/* General Body/Page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Ensure heading color contrasts with background */
+}
+
+/* Input Area */
+.input-container { /* Ensure your HTML has a div with this class around input and button */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; /* Increased margin */
+    gap: 10px; /* Space between input and button */
+}
+
+#note-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-grow: 1;
+    max-width: 500px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#add-note-btn {
+    padding: 10px 15px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+#add-note-btn:hover {
+    background-color: #4cae4c;
+}
+
+/* Notes Container & Category Sections */
+#notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 0; /* Remove default padding if any */
+}
+
+.category-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-basis: 300px; /* min-width for columns */
+    flex-grow: 1;
+    margin-bottom: 20px; /* Add space between stacked sections on smaller screens */
+}
+
+.category-section h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.2em; /* Adjust size as needed */
+    color: #555; /* Slightly softer color for category headers */
+}
+
+/* Note Items (<li>) */
+.category-section ul { /* Target uls within .category-section specifically */
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+}
+
+.category-section ul li { /* Target lis within .category-section uls */
+    padding: 10px 0; /* Adjusted padding */
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px; /* Add gap between items in li */
+}
+
+.category-section ul li:last-child {
+    border-bottom: none;
+}
+
+.note-text { /* Ensure this class is on the span containing note text */
+    flex-grow: 1;
+    margin-right: 10px;
+    word-break: break-word; /* Prevent long words from overflowing */
+}
+
+/* Buttons within list items */
+.category-section ul li button, 
+.category-section ul li input[type="button"] { /* General styling for edit/delete/save/cancel buttons */
+    margin-left: 5px;
+    padding: 6px 10px; /* Slightly larger padding */
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em; /* Adjust font size */
+    transition: background-color 0.2s ease; /* Smooth transition */
+}
+
+.edit-btn, .save-btn { /* .save-btn can share .edit-btn styles if desired or have its own */
+    background-color: #f0ad4e;
+    color: white;
+}
+.edit-btn:hover, .save-btn:hover {
+    background-color: #ec971f;
+}
+
+.delete-btn, .cancel-btn { /* .cancel-btn can share .delete-btn styles or have its own */
+    background-color: #d9534f;
+    color: white;
+}
+.delete-btn:hover, .cancel-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Specifically for the .cancel-btn if different styling is desired */
+.cancel-btn {
+    background-color: #777; /* Grey color for cancel */
+}
+.cancel-btn:hover {
+    background-color: #666;
+}
+
+
+/* Inline edit input field */
+.category-section ul li input[type="text"] {
+    flex-grow: 1;
+    padding: 8px; /* Adjusted padding */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-right: 5px; /* Add some margin if next to a button */
+}
+
+/* Mobile Friendliness (Basic) */
+@media (max-width: 768px) { /* Wider breakpoint for tablets/larger phones */
+    .category-section {
+        flex-basis: calc(50% - 20px); /* Two columns on medium screens, accounting for gap */
+    }
+}
+
+@media (max-width: 600px) {
+    .input-container {
+        flex-direction: column;
+        align-items: stretch; /* Make items take full width */
+    }
+    #note-input {
+        max-width: 100%; /* Allow input to take full width */
+        margin-bottom: 10px; /* Space when stacked */
+    }
+    #add-note-btn {
+        width: 100%;
+    }
+    .category-section {
+        flex-basis: 100%; /* Full width for category sections on small screens */
+    }
+    .category-section ul li {
+        flex-direction: column; /* Stack items in li on small screens */
+        align-items: stretch; /* Stretch items */
+    }
+    .note-text {
+        margin-bottom: 10px; /* Space between text and buttons when stacked */
+        margin-right: 0;
+    }
+    .category-section ul li div.buttons-container { /* Assuming you wrap buttons in a div for better control */
+        display: flex;
+        justify-content: flex-end; /* Align buttons to the right */
+        gap: 5px;
+    }
+     .category-section ul li button,
+     .category-section ul li input[type="button"] {
+        width: calc(33.333% - 4px); /* Distribute width among 3 buttons if save/cancel/delete */
+        margin-left: 0;
+        /* Add margin-bottom if they wrap and stack */
+    }
+    .category-section ul li input[type="text"] {
+        margin-bottom: 10px; /* Space between input and buttons when stacked */
+    }
+}
